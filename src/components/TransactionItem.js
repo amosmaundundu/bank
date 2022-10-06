@@ -1,11 +1,32 @@
-export default function TransactionItem({index, category,date,description,amount}){
-    const isEven= index%2===0
+import React from 'react';
+import Transactions from "./Transactions";
+
+function TransactionItem({transactions}) {
+    const list = transactions.map((item)=>{
+      return <Transactions key={item.id} date={item.date} description={item.description} category={item.category} amount={item.amount} />;
+    })
     return (
-        <tr className={isEven?"even":""}>
-            <td>{date}</td>
-            <td>{category}</td>
-            <td>{description}</td>
-            <td>{amount}</td>
-        </tr>
-    )
-}
+      <table className="ui celled striped padded table">
+        <tbody>
+          <tr>
+            <th>
+              <h3 className="ui center aligned header">Date</h3>
+            </th>
+            <th>
+              <h3 className="ui center aligned header">Description</h3>
+            </th>
+            <th>
+              <h3 className="ui center aligned header">Category</h3>
+            </th>
+            <th>
+              <h3 className="ui center aligned header">Amount</h3>
+            </th>
+          </tr>
+          {/* render a list of <Transaction> components here */}
+          {list}
+        </tbody>
+      </table>
+    );
+  }
+export default TransactionItem
+
